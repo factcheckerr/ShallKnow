@@ -51,6 +51,11 @@ Also, change the endpoint of the api [here](https://github.com/factcheckerr/Shal
 python scripts/extract_triples.py
 ```
 
+<i>The following is an example of triple extraction:<i>
+
+
+![Overview](utils/triples_extraction.png)
+
 
 
 ## Additional Resources
