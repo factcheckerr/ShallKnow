@@ -64,6 +64,15 @@ python scripts/extract_triples.py
 
 More informations about included datasets [here](https://zenodo.org/records/15390036)
 
+### Supporting Tools
+
+
+To compute fact-checking scores and evaluate our approach in ShallKnow, we use the following tools:
+
+- [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream): Used to compute plausibility scores for RDF triples based on path-based reasoning over the knowledge graph.
+- [FAVEL](https://github.com/dice-group/favel): Used for fact-checking evaluation.
+- [GERBIL](https://gerbil-kbc.aksw.org/gerbil/config): Used for standardized benchmarking.
+
 
 
 
