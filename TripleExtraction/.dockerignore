@@ -1,0 +1,6 @@
+# .dockerignore
+ss.env
+*.log
+*.md
+rebel_output
+.git

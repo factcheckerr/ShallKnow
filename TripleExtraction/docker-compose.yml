@@ -1,0 +1,58 @@
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports: ["11435:11434"]
+    runtime: nvidia
+    volumes:
+      - /data/ollama:/root/.ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    environment:
+      - OLLAMA_HOME=/data/ollama
+
+  relik:
+    environment:
+    image: "sapienzanlp/relik:latest"
+    command: ["--config", "relik-ie/relik-relation-extraction-large","--device","cuda"]
+    runtime: nvidia
+    ports:
+      - "12346:8000"
+  tp:
+    image: "hub.cs.upb.de/dice-research/images/nebulatp:1.1.38"
+    volumes:
+      - ./:/rebel_output/NELA/claimwise_nela/"
+      - /data/nebula/TripleExtraction/NebulaTripleExtraction/logs:/data/hub/
+      - /data/nebula/TripleExtraction/NebulaTripleExtraction/rebel_output/NELA/claimwise_nela/linking/:/data/nebula/TripleExtraction/NebulaTripleExtraction/rebel_output/NELA/claimwise_nela/linking
+#      - /data/new_split:/data/new_split
+#      - /data/new_split/folder1:/data/new_split/folder1
+#      - /data/new_split/redirect_folder_1:/data/new_split/redirect_folder_1
+#      - /data/new_split/processed_wiki_pages_redirected_limbo:/data/new_split/processed_wiki_pages_redirected_limbo
+#      - /data/new_split/raki_folder7_1:/data/new_split/raki_folder7_1
+      - /data/hub:/data/hub
+      - /data/favel_dataset:/data/favel_dataset
+      - /data/favel_dataset/folder1:/data/favel_dataset/folder1
+      - /data/nebula/WikipediaExtractor/wikipedia_processed_test4:/data/nebula/WikipediaExtractor/wikipedia_processed_test4
+      - /data/nebula/WikipediaExtractor:/data/nebula/WikipediaExtractor
+      - /data/new_split/new/train/favel_experiments/favel_experiment:/data/new_split/new/train/favel_experiments/favel_experiment
+      - /data/new_split/new/train/favel_experiments/favel_experiment/wikipedia_processed_favel_train_correct:/data/new_split/new/train/favel_experiments/favel_experiment/wikipedia_processed_favel_train_correct
+
+    build: "."
+    ports:
+      - "5000:5000"
+
+    environment:
+      - RELIK_URL=http://relik:8000/api/relik
+      - OLLAMA_URL=http://ollama:11434/api/generate
+      - LFQA_URL=http://neamt1.cs.upb.de:6100/custom-pipeline
+      - log_level=INFO
+      - dataset_path=/data/nebula/TripleExtraction/NebulaTripleExtraction/rebel_output/NELA/claimwise_nela/
+      - RUNNING_IN_DOCKER=True
+      - RABEL_INCLUDE=False
+      - KG_GEN_INCLUDE=False
+      - NER_TOOL=babelscape_ner
+      - EL_TOOL=mgenre_el
+      - MODEL=deepseek-r1:14b
+      - TEXT_TAG=coref_text_llm
