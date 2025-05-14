@@ -12,9 +12,13 @@ services:
     restart: unless-stopped
     environment:
       - OLLAMA_HOME=/data/ollama
+      - DOCKER_USERNAME=# fixme
+      - DOCKER_PASSWORD=# fixme
 
   relik:
     environment:
+      - DOCKER_USERNAME=# fixme
+      - DOCKER_PASSWORD=# fixme
     image: "sapienzanlp/relik:latest"
     command: ["--config", "relik-ie/relik-relation-extraction-large","--device","cuda"]
     runtime: nvidia
