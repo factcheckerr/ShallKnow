@@ -1,0 +1,44 @@
+import sys
+import re
+from scipy.stats import wilcoxon
+
+if len(sys.argv) != 3:
+    print(f"Usage: python {sys.argv[0]} file1.ttl file2.ttl")
+    sys.exit(1)
+
+def extract_truthvalues(ttlfile):
+    truth = {}
+    pattern = re.compile(
+        r'^(<[^>]+>)\s+<http://swc2017\.aksw\.org/hasTruthValue>\s+"([0-9.eE+-]+)"\^\^<http://www.w3.org/2001/XMLSchema#double>'
+    )
+    with open(ttlfile, encoding='utf-8') as f:
+        for line in f:
+            m = pattern.match(line)
+            if m:
+                subj, val = m.groups()
+                truth[subj] = float(val)
+    return truth
+
+# Extract from both files
+tv1 = extract_truthvalues(sys.argv[1])
+tv2 = extract_truthvalues(sys.argv[2])
+
+# Find common subjects
+subjects = set(tv1) & set(tv2)
+if not subjects:
+    print("No matching subjects in both files.")
+    sys.exit(1)
+
+vals1 = [tv1[s] for s in subjects]
+vals2 = [tv2[s] for s in subjects]
+
+print(f"Number of matched facts: {len(subjects)}")
+
+stat, p = wilcoxon(vals1, vals2)
+print(f"\nWilcoxon signed-rank test results ({sys.argv[1]} vs {sys.argv[2]}):")
+print(f"  Statistic: {stat:.3f}")
+print(f"  p-value:   {p:.4g}")
+if p < 0.05:
+    print("  --> Significant difference (reject H0 at alpha=0.05)")
+else:
+    print("  --> Not significant (do not reject H0 at alpha=0.05)")
