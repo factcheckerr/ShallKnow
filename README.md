@@ -2,7 +2,6 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![arXiv](https://img.shields.io/badge/paper-arXiv-red)](https://arxiv.org/abs/...)
 
 This repository contains the official implementation of **ShallKnow**, our fact-checking framework for knowledge graphs, as described in the paper:
 
@@ -114,16 +113,10 @@ All datasets and benchmark splits are described in [this Zenodo record](https://
 
 ## 📜 Citation
 
-If you use ShallKnow in your research, please cite:
+Tobe added later
 
 ```bibtex
-@article{your_shallknow_bibtex_entry,
-  title={No Need to Be a Know-It-All: Fact Checking with Shallow Knowledge},
-  author={...},
-  year={2024},
-  journal={...},
-  note={\url{https://github.com/factcheckerr/ShallKnow}}
-}
+
 ```
 
 ---
@@ -132,113 +125,6 @@ If you use ShallKnow in your research, please cite:
 
 We welcome pull requests and issue reports! For questions and collaboration, please [open an issue](https://github.com/factcheckerr/ShallKnow/issues) or email us.
 
----
-
-**Copy the text above for your README.md—do not wrap it in triple backticks!**  
-If you paste it into GitHub, it will render as intended.  
-Let me know if you’d like to customize further!
-
-
-# No Need to Be a Know-It-All:Fact Checking Approach with Shallow Knowledge
-This open-source project contains the Python implementation of our approach, ShallKnow. It is designed to improve fact-checking over knowledge graphs by augmenting them with shallow knowledge, automatically extracted RDF triples from unstructured sources. ShallKnow improves KG coverage, enabling more effective support or refutation of claims. 
-
-## Pre-requisites
-All experiments in paper are executed on a server with 128 CPU cores, 1 TB RAM, and 2×NVIDIA RTX 6000 Ada Generation GPUs.  GPU is important for running LLMs and Relik models.
-
-
-## Installation
-
-First, clone the repository:
-<details><summary> </summary>
- 
-```bash
-git clone https://github.com/factcheckerr/ShallKnow.git
-cd ShallKnow
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-or 
-
-```bash
-git clone https://github.com/factcheckerr/ShallKnow.git
-cd ShallKnow
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-```
-</details>
-
-
-
-## Running experiments
-
-To run this experiment, it is essential that Ollama is installed on your system. If it is not already installed, you can find more information and download it from the official website [here](https://ollama.com/download)
-
-Then, pull and run the required model:
-<details><summary> </summary>
-
-```bash
-ollama pull deepseek-r1:14b
-ollama run deepseek-r1:14b
-```
-</details>
-
-Once the model is running, execute the main script:
-
-```bash
-python scripts/wikipedia_extractor_final.py deepseek-r1:14b
-```
-
-
-## Starting Triple Extraction API
-If you want to extract new triples from an unstructured textual source. You need to start triple extraction API using [docker image](https://github.com/factcheckerr/ShallKnow/blob/main/TripleExtraction/docker-compose.yml) file.
-
-```bash
-cd TripleExtraction
-sudo docker up
-```
-and then you have to run deepseek-r1:14b inside docker container for secondary triple extraction step.
-
-```bash
-sudo docker ps
-```
-
-it will return the IDs of 3 container. Note down the ID of Ollama container and then execute the following command, replacing the IDs.
-
-```bash
-sudo docker exec -it <pid> bash
-```
-
-After that, the output files from this experiment will serve as the input for the triple extraction process. Update the input folder name accordingly and proceed to run the next experiment.
-Also, change the endpoint of the api [here](https://github.com/factcheckerr/ShallKnow/blob/main/scripts/extract_triples.py) if hosted on different port. `endpoint = "http://localhost:5000/extract"`
-
-
-```bash
-python scripts/extract_triples.py
-```
-
-<i>The following is an example of triple extraction:<i>
-
-
-![Overview](utils/triples_extraction.png)
-
-
-
-## Additional Resources
-
-### Datasets
-
-More informations about included datasets [here](https://zenodo.org/records/15390036)
-
-### Supporting Tools
-
-
-To compute fact-checking scores and evaluate our approach in ShallKnow, we use the following tools:
-
-- [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream): Used to compute plausibility scores for RDF triples based on path-based reasoning over the knowledge graph.
-- [FAVEL](https://github.com/dice-group/favel): Used for fact-checking evaluation.
-- [GERBIL](https://gerbil-kbc.aksw.org/gerbil/config): Used for standardized benchmarking.
 
 
 
