@@ -32,7 +32,6 @@ All experiments were executed on a server with **128 CPU cores, 1 TB RAM, and 
 
 ## 🔧 Installation
 
-<details id="__DETAIL_0__"/>
 
 ---
 
