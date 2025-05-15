@@ -18,7 +18,7 @@ ShallKnow enables more effective support or refutation of factual claims by incr
 |                            | `python3 -m venv venv`<br>`source venv/bin/activate`<br>`pip install -r requirements.txt` |
 | Install Ollama (for LLMs)  | [Ollama download & docs](https://ollama.com/download)                             |
 | Run DeepSeek LLM           | `ollama pull deepseek-r1:14b`<br>`ollama run deepseek-r1:14b`                     |
-| Run main pipeline          | `python scripts/wikipedia_extractor_final.py deepseek-r1:14b`                     |
+| Run Entity-Centric Paragraph Simplification         | `python scripts/wikipedia_extractor_final.py deepseek-r1:14b`                     |
 | (Advanced) Triple Extraction API | See below for Docker-based API extraction and example `curl` calls         |
 
 ---
@@ -32,7 +32,13 @@ ShallKnow enables more effective support or refutation of factual claims by incr
 
 ## 🔧 Installation
 
-<details id="__DETAIL_0__"/>
+```bash
+ git clone https://github.com/factcheckerr/ShallKnow.git
+ cd ShallKnow  
+ python3 -m venv venv
+ source venv/bin/activate
+ pip install -r requirements.txt
+```
 
 ---
 
