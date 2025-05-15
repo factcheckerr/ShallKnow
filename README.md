@@ -56,11 +56,11 @@ Once the LLM is running, start the extraction:
 python scripts/wikipedia_extractor_final.py deepseek-r1:14b
 ```
 
-Once all paragraphs are simplified. Run the triple extraction API for triple extraction from them.
+Once all paragraphs are simplified. Run the Triple Extraction API for triple extraction step.
 
 ---
 
-## 🔄 Triple Extraction API 
+## 3, 🔄 Triple Extraction API 
 
 To extract new triples from unstructured text via API:
 
