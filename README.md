@@ -32,6 +32,7 @@ All experiments were executed on a server with **128 CPU cores, 1 TB RAM, and 
 
 ## 🔧 Installation
 
+`git clone https://github.com/factcheckerr/ShallKnow.git`<br>`cd ShallKnow`<br>`python3 -m venv venv`<br>`source venv/bin/activate`<br>`pip install -r requirements.txt` 
 
 ---
 
@@ -72,6 +73,9 @@ Then, run DeepSeek inside the Ollama container:
 ```bash
 sudo docker ps  # Find the container ID for Ollama
 sudo docker exec -it <container_id> bash
+inside bash:
+ollama pull deepseek-r1:14b
+ollama run deepseek-r1:14b
 ```
 
 ### Calling the Triple Extraction API
