@@ -57,10 +57,11 @@ This folder provides the **prediction files and AUROC (Area Under ROC Curve) gra
 ![BPDP G** Results](https://github.com/user-attachments/assets/8139857b-52fd-4e1c-86d1-dfdba0458098)
 
 ---
-
 ## Notes
 
-- **Prediction files:** For reproducibility, we include all output files used to generate AUROC graphs.
-- **Generating more curves:** AUROC for approaches not plotted here can be easily generated using your provided prediction files and the [GERBIL](https://gerbil-kbc.aksw.org/gerbil/) web UI or scripts.
+- **Prediction files:**  
+  - For most approaches, predictions are supplied in CSV format (prediction score files).
+  - For COPAAL, predictions are formatted as GERBIL-compatible TSV files.
+- **Generating more curves:** AUROC for approaches not plotted here can be easily generated using your provided CSV files and the [GERBIL](https://gerbil-kbc.aksw.org/gerbil/) web interface.
 
 ---
