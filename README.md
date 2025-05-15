@@ -19,8 +19,8 @@ ShallKnow augments knowledge graphs (KGs) with shallow knowledge—RDF triples e
 | Clone the repo & create env              | `git clone https://github.com/factcheckerr/ShallKnow.git`<br>`cd ShallKnow`<br>`python3 -m venv venv`<br>`source venv/bin/activate`<br>`pip install -r requirements.txt` |
 | Install Ollama (for LLMs)                | See [Ollama website](https://ollama.com/download)            |
 | Run DeepSeek LLM                         | `ollama pull deepseek-r1:14b`<br>`ollama run deepseek-r1:14b`|
-| Start extraction and KG augmentation     | `python scripts/wikipedia_extractor_final.py deepseek-r1:14b`|
-| (Advanced) Triple Extraction API (Docker)| See section below                                            |
+| Start Entity-Centric Paragraph Simplification and KG augmentation     | `python scripts/wikipedia_extractor_final.py deepseek-r1:14b`|
+| (Advanced) Primary and Secondary Triple Extraction API (Docker)| See section below                                            |
 
 ---
 
