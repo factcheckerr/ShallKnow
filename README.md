@@ -3,6 +3,10 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://hub.docker.com/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/factcheckerr/ShallKnow/ci.yml?branch=main)](https://github.com/factcheckerr/ShallKnow/actions)
+[![Docs](https://img.shields.io/badge/docs-complete-brightgreen.svg)](#)
+
 
 This repository contains the official implementation of **ShallKnow**—a framework for improving fact-checking over knowledge graphs by augmenting them with automatically extracted RDF triples ("shallow knowledge") from unstructured text.
 
@@ -119,12 +123,12 @@ A snapshot of the top properties in our extracted triples:
 |------------------|----------|
 | wdt:P17          | 21,143   |
 | wdt:P276         | 8,028    |
-------------------------------
+|------------------|----------|
 | P-Located_in     | 1,407    |
 | P-Nationality    | 844      |
-------------------------------
+|------------------|----------|
 
-Full CSVs and charts are available in `/analysis`.
+Full CSVs and charts are available in `/Prediction_files_and_AUROC_graphs`.
 
 ---
 
@@ -149,7 +153,13 @@ If you use ShallKnow in your research, please cite:
 ```bibtex
 # TODO
 ```
+---
 
+## 🙏 Acknowledgements
+
+*To be added later.*
+
+---
 ---
 
 ## 🤝 Contributing and Support
