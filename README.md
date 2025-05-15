@@ -119,8 +119,10 @@ A snapshot of the top properties in our extracted triples:
 |------------------|----------|
 | wdt:P17          | 21,143   |
 | wdt:P276         | 8,028    |
+------------------------------
 | P-Located_in     | 1,407    |
 | P-Nationality    | 844      |
+------------------------------
 
 Full CSVs and charts are available in `/analysis`.
 
