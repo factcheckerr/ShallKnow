@@ -1,3 +1,4 @@
+
 # No Need to Be a Know-It-All: Fact Checking Approach with Shallow Knowledge
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)
@@ -113,10 +114,11 @@ All datasets and benchmark splits are described in [this Zenodo record](https://
 
 ## 📜 Citation
 
-Tobe added later
+If you use ShallKnow in your research, please cite:
 
 ```bibtex
-
+#TODO 
+}
 ```
 
 ---
@@ -124,11 +126,3 @@ Tobe added later
 ## 🤝 Contributing and Support
 
 We welcome pull requests and issue reports! For questions and collaboration, please [open an issue](https://github.com/factcheckerr/ShallKnow/issues) or email us.
-
-
-
-
-
-
-
-
