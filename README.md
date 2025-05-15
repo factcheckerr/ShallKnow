@@ -60,7 +60,7 @@ Once all paragraphs are simplified. Run the Triple Extraction API for triple ext
 
 ---
 
-## 3, 🔄 Triple Extraction API 
+## 3. 🔄 Triple Extraction API 
 
 To extract new triples from unstructured text via API:
 
@@ -80,7 +80,7 @@ ollama run deepseek-r1:14b
 
 ### Calling the Triple Extraction API
 
-To extract triples from a **folder of preprocessed articles** (output from the Main Extraction step), use:
+To extract triples from a **folder of preprocessed articles** (output from the Entity-Centric Paragraph Simplification step), use:
 
 ```bash
 curl --location --request POST 'http://localhost:5000/dextract' \
