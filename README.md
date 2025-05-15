@@ -4,35 +4,35 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This repository contains the official implementation of **ShallKnow**, our fact-checking framework for knowledge graphs, as described in the paper:
+This repository contains the official implementation of **ShallKnow**—a framework for improving fact-checking over knowledge graphs by augmenting them with automatically extracted RDF triples ("shallow knowledge") from unstructured text.
 
-**No Need to Be a Know-It-All: Fact Checking with Shallow Knowledge.** [arXiv link here]
-
-ShallKnow augments knowledge graphs (KGs) with shallow knowledge—RDF triples extracted automatically from unstructured text—enabling more effective support or refutation of factual claims.
+ShallKnow enables more effective support or refutation of factual claims by increasing KG coverage with high-utility, external information.
 
 ---
 
 ## 🚀 Quick Start
 
-| **Step**                                | **Command / Notes**                                          |
-|------------------------------------------|--------------------------------------------------------------|
-| Clone the repo & create env              | `git clone https://github.com/factcheckerr/ShallKnow.git`<br>`cd ShallKnow`<br>`python3 -m venv venv`<br>`source venv/bin/activate`<br>`pip install -r requirements.txt` |
-| Install Ollama (for LLMs)                | See [Ollama website](https://ollama.com/download)            |
-| Run DeepSeek LLM                         | `ollama pull deepseek-r1:14b`<br>`ollama run deepseek-r1:14b`|
-| Start Entity-Centric Paragraph Simplification and KG augmentation     | `python scripts/wikipedia_extractor_final.py deepseek-r1:14b`|
-| (Advanced) Primary and Secondary Triple Extraction API (Docker)| See section below                                            |
+| **Step**                   | **Command / Notes**                                                               |
+|----------------------------|-----------------------------------------------------------------------------------|
+| Clone repo & create env    | `git clone https://github.com/factcheckerr/ShallKnow.git`<br>`cd ShallKnow`       |
+|                            | `python3 -m venv venv`<br>`source venv/bin/activate`<br>`pip install -r requirements.txt` |
+| Install Ollama (for LLMs)  | [Ollama download & docs](https://ollama.com/download)                             |
+| Run DeepSeek LLM           | `ollama pull deepseek-r1:14b`<br>`ollama run deepseek-r1:14b`                     |
+| Run main pipeline          | `python scripts/wikipedia_extractor_final.py deepseek-r1:14b`                     |
+| (Advanced) Triple Extraction API | See below for Docker-based API extraction and example `curl` calls         |
 
 ---
 
 ## 💻 Hardware Requirements
 
-All experiments were executed on a server with **128 CPU cores, 1 TB RAM, and 2×NVIDIA RTX 6000 Ada GPUs**. A GPU is essential for running LLM and Relik models.
+- **Recommended:** 128 CPU cores, 1 TB RAM, 2×NVIDIA RTX 6000 Ada GPUs
+- **Notes:** A GPU is required for LLM and Relik components.
 
 ---
 
 ## 🔧 Installation
 
-`git clone https://github.com/factcheckerr/ShallKnow.git`<br>`cd ShallKnow`<br>`python3 -m venv venv`<br>`source venv/bin/activate`<br>`pip install -r requirements.txt` 
+<details id="__DETAIL_0__"/>
 
 ---
 
@@ -40,27 +40,23 @@ All experiments were executed on a server with **128 CPU cores, 1 TB RAM, and 
 
 ### 1. Start LLM (DeepSeek) with Ollama
 
-- [Install Ollama](https://ollama.com/download) if not yet done.
-- Pull and run the DeepSeek model:
-
 ```bash
 ollama pull deepseek-r1:14b
 ollama run deepseek-r1:14b
 ```
+(See [Ollama download](https://ollama.com/download) if needed.)
 
-### 2. Run Entity-Centric Paragraph Simplification
+### 2. Entity-Centric Paragraph Simplification and KG Augmentation
 
-Once the LLM is running, start the extraction:
+Run the Entity-Centric Paragraph Simplification script:
 
 ```bash
 python scripts/wikipedia_extractor_final.py deepseek-r1:14b
 ```
 
-Once all paragraphs are simplified. Run the Triple Extraction API for triple extraction step.
-
 ---
 
-## 3. 🔄 Triple Extraction API 
+### 3 🔄 Triple Extraction API (Advanced)
 
 To extract new triples from unstructured text via API:
 
@@ -68,57 +64,50 @@ To extract new triples from unstructured text via API:
 cd TripleExtraction
 sudo docker compose up
 ```
-
-Then, run DeepSeek inside the Ollama container:
+Then, run DeepSeek in the Ollama container:
 ```bash
-sudo docker ps  # Find the container ID for Ollama
+sudo docker ps  # Find the Ollama container ID
 sudo docker exec -it <container_id> bash
-inside bash:
+# Inside the container:
 ollama pull deepseek-r1:14b
 ollama run deepseek-r1:14b
 ```
 
 ### Calling the Triple Extraction API
 
-To extract triples from a **folder of preprocessed articles** (output from the Entity-Centric Paragraph Simplification step), use:
+- **For a folder of preprocessed articles:**
+  ```bash
+  curl --location --request POST 'http://localhost:5000/dextract' \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'query=folder:/your/path/to/preprocessed_folder' \
+    --data-urlencode 'components=triple_extraction'
+  ```
 
-```bash
-curl --location --request POST 'http://localhost:5000/dextract' \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data-urlencode 'query=folder:/data/new_split/new/train/favel_experiments/favel_experiment/wikipedia_processed_favel_train_correct' \
-  --data-urlencode 'components=triple_extraction'
-```
+- **For a single sentence or paragraph:**
+  ```bash
+  curl --location --request POST 'http://localhost:5000/extract' \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'query=Edith Frank was married to Otto Frank and born in Frankfurt.' \
+    --data-urlencode 'components=triple_extraction'
+  ```
 
-If you want to extract triples from a **single sentence or paragraph**, call the API endpoint `extract` instead of `dextract` and provide the actual text in the `query` parameter, without specifying a folder:
+**Note:** Use `dextract` for batch/folder processing or `extract` for a single text input.
 
-```bash
-curl --location --request POST 'http://localhost:5000/extract' \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data-urlencode 'query=Edith Frank was married to Otto Frank and born in Frankfurt.' \
-  --data-urlencode 'components=triple_extraction'
-```
-
-- Use `dextract` for **batch folder processing** (`query=folder:/path/to/folder`)
-- Use `extract` for **single textual input** (`query=Your sentence or paragraph goes here`)
-
-The API will return extracted triples in the expected output format.
-
-
-**Example output:**  
+**Example output:**
 ![Overview](utils/triples_extraction.png)
 
-You can also use the following scipt to extract triples.
-Point your extraction script to the API endpoint (`extract_triples.py`, default `http://localhost:5000/extract`):
-
+### 3 Alternate approach
+Alternatively, use the script:
 ```bash
 python scripts/extract_triples.py
 ```
+Adjust the API endpoint in the script if needed (default: `http://localhost:5000/extract`).
 
 ---
 
-## 📊 Example Output
+## 📊 Output Stats
 
-Here’s a snapshot of the top properties in our extracted triples (trimmed):
+A snapshot of the top properties in our extracted triples:
 
 | Property         | Count    |
 |------------------|----------|
@@ -127,7 +116,7 @@ Here’s a snapshot of the top properties in our extracted triples (trimmed):
 | P-Located_in     | 1,407    |
 | P-Nationality    | 844      |
 
-(see `/analysis` for full CSVs and charts for your own datasets)
+Full CSVs and charts are available in `/analysis`.
 
 ---
 
@@ -135,13 +124,13 @@ Here’s a snapshot of the top properties in our extracted triples (trimmed):
 
 ### Datasets
 
-All datasets and benchmark splits are uploaded in [this Zenodo record](https://zenodo.org/records/15390036).
+All datasets are provided on [Zenodo](https://zenodo.org/records/15390036).
 
 ### Supporting Tools
 
-- [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream): Path-based scoring for RDF triples.
-- [FAVEL](https://github.com/dice-group/favel): Fact-checking evaluation.
-- [GERBIL](https://gerbil-kbc.aksw.org/gerbil/config): Standardized KG benchmarking.
+- [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream): Path-based plausibility scoring for RDF triples
+- [FAVEL](https://github.com/dice-group/favel): Benchmark fact-checking evaluation platform
+- [GERBIL](https://gerbil-kbc.aksw.org/gerbil/config): Standardized benchmarking of KG tasks
 
 ---
 
@@ -150,12 +139,12 @@ All datasets and benchmark splits are uploaded in [this Zenodo record](https://z
 If you use ShallKnow in your research, please cite:
 
 ```bibtex
-#TODO 
-}
+# TODO
 ```
 
 ---
 
 ## 🤝 Contributing and Support
 
-We welcome pull requests and issue reports! For questions and collaboration, please [open an issue](https://github.com/factcheckerr/ShallKnow/issues) or email us.
+We welcome pull requests and issue reports! For questions and further contributions, please [open an issue](https://github.com/factcheckerr/ShallKnow/issues).
+```
