@@ -74,13 +74,41 @@ sudo docker ps  # Find the container ID for Ollama
 sudo docker exec -it <container_id> bash
 ```
 
+### Calling the Triple Extraction API
+
+To extract triples from a **folder of preprocessed articles** (output from the Main Extraction step), use:
+
+```bash
+curl --location --request POST 'http://localhost:5000/dextract' \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'query=folder:/data/new_split/new/train/favel_experiments/favel_experiment/wikipedia_processed_favel_train_correct' \
+  --data-urlencode 'components=triple_extraction'
+```
+
+If you want to extract triples from a **single sentence or paragraph**, call the API endpoint `extract` instead of `dextract` and provide the actual text in the `query` parameter, without specifying a folder:
+
+```bash
+curl --location --request POST 'http://localhost:5000/extract' \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'query=Edith Frank was married to Otto Frank and born in Frankfurt.' \
+  --data-urlencode 'components=triple_extraction'
+```
+
+- Use `dextract` for **batch folder processing** (`query=folder:/path/to/folder`)
+- Use `extract` for **single textual input** (`query=Your sentence or paragraph goes here`)
+
+The API will return extracted triples in the expected output format.
+
+
+**Example output:**  
+![Overview](utils/triples_extraction.png)
+
+You can also use the following scipt to extract triples.
 Point your extraction script to the API endpoint (`extract_triples.py`, default `http://localhost:5000/extract`):
 
 ```bash
 python scripts/extract_triples.py
 ```
-**Example output:**  
-![Overview](utils/triples_extraction.png)
 
 ---
 
@@ -103,7 +131,7 @@ Here’s a snapshot of the top properties in our extracted triples (trimmed):
 
 ### Datasets
 
-All datasets and benchmark splits are described in [this Zenodo record](https://zenodo.org/records/15390036).
+All datasets and benchmark splits are uploaded in [this Zenodo record](https://zenodo.org/records/15390036).
 
 ### Supporting Tools
 
