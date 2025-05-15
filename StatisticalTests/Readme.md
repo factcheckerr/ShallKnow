@@ -13,5 +13,5 @@ A difference is considered “significant” if the p-value calculated by the te
      If p-value ≥ 0.05 → Not significant: You do not reject the null hypothesis; there’s not enough evidence to support a difference.
      
 
-![image](https://github.com/user-attachments/assets/d27cbc0a-5f9b-4e21-86c3-59a7622e61f0)
 wilcoxen tests
+![Screenshot from 2025-05-14 19-13-04](https://github.com/user-attachments/assets/f1eb2ea6-95c1-4138-babe-4ccf15d68ddc)
