@@ -48,7 +48,7 @@ ollama pull deepseek-r1:14b
 ollama run deepseek-r1:14b
 ```
 
-### 2. Run Main Extraction
+### 2. Run Entity-Centric Paragraph Simplification
 
 Once the LLM is running, start the extraction:
 
@@ -56,9 +56,11 @@ Once the LLM is running, start the extraction:
 python scripts/wikipedia_extractor_final.py deepseek-r1:14b
 ```
 
+Once all paragraphs are simplified. Run the triple extraction API for triple extraction from them.
+
 ---
 
-## 🔄 Triple Extraction API (Optional - Advanced)
+## 🔄 Triple Extraction API 
 
 To extract new triples from unstructured text via API:
 
