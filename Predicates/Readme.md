@@ -1,6 +1,6 @@
 # Extracted Predicate List
 
-This folder contains files listing all unique predicates (properties) extracted from the knowledge graph or raw triple datasets used in our experiments.
+This folder contains files listing all unique predicates (properties) extracted and used in our experiments.
 
 - Each file provides a summary of predicates either in original format (full URI) or with shortened/prefixed forms (e.g., `wdt:P17`, `P-Located_in`).
 - Counts are provided to indicate how many times each predicate appears in the extracted data.
