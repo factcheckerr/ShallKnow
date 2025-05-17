@@ -156,7 +156,7 @@ To reproduce results for all fact-validation approaches over large knowledge gra
 
 **Before you begin:**
 - Download the latest Wikidata RDF dump.
-- Append the extracted triples provided in the `/Assertions` folder to the Wikidata dump.
+- Append the extracted triples (G* or G** or both) provided in the `/Assertions` folder to the Wikidata dump.
 - Specify the location of the combined KG file in the main configuration of the Kstream-Graph-Transformer project.
 
 After transforming the KG, you can use [FAVEL](https://github.com/dice-group/favel) together with [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream) to run and evaluate the following baseline approaches:
@@ -173,6 +173,7 @@ After transforming the KG, you can use [FAVEL](https://github.com/dice-group/fav
 For step-by-step instructions, refer to the documentation in each individual repository. The combination of these tools allows for reproducible evaluation and benchmarking in line with the results reported in our paper.
 
 Note: For **COPAAL**, please refer to the [COPAAL documentation](https://github.com/dice-group/COPAAL) for instructions on setting the KG as endpoint and running the approach.
+
 ---
 
 
