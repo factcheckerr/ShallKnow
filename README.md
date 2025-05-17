@@ -132,11 +132,27 @@ Full CSVs and charts are available in `/Prediction_files_and_AUROC_graphs`.
 
 ---
 
+
+## 📚 Additional Resources
+
+### Datasets
+
+All datasets are provided on [Zenodo](https://zenodo.org/records/15390036).
+
+### Supporting Tools
+
+- [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream): Path-based plausibility scoring for RDF triples
+- [FAVEL](https://github.com/dice-group/favel): Benchmark fact-checking evaluation platform
+- [GERBIL](https://gerbil-kbc.aksw.org/gerbil/config): Standardized benchmarking of KG tasks
+
+---
+
+
 ---
 
 ## 🏆 Reproducing Results for Competing Approaches
 
-To reproduce results for all baseline approaches over large knowledge graphs, we provide an updated version of the [Kstream-Graph-Transformer](https://github.com/factcheckerr/knowledgestream-graph-transformer) project. This tool transforms your KG for compatibility with large-scale path-based evaluation frameworks.
+To reproduce results for all fact-validation approaches over large knowledge graphs, we provide an updated version of the [Kstream-Graph-Transformer](https://github.com/factcheckerr/knowledgestream-graph-transformer) project. This tool transforms your KG for compatibility with large-scale path-based evaluation frameworks.
 
 **Before you begin:**
 - Download the latest Wikidata RDF dump.
@@ -156,22 +172,10 @@ After transforming the KG, you can use [FAVEL](https://github.com/dice-group/fav
 
 For step-by-step instructions, refer to the documentation in each individual repository. The combination of these tools allows for reproducible evaluation and benchmarking in line with the results reported in our paper.
 
+Note: For **COPAAL**, please refer to the [COPAAL documentation](https://github.com/dice-group/COPAAL) for instructions on setting the KG as endpoint and running the approach.
 ---
 
 
-## 📚 Additional Resources
-
-### Datasets
-
-All datasets are provided on [Zenodo](https://zenodo.org/records/15390036).
-
-### Supporting Tools
-
-- [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream): Path-based plausibility scoring for RDF triples
-- [FAVEL](https://github.com/dice-group/favel): Benchmark fact-checking evaluation platform
-- [GERBIL](https://gerbil-kbc.aksw.org/gerbil/config): Standardized benchmarking of KG tasks
-
----
 
 ## 📜 Citation
 
