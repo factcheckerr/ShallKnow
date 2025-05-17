@@ -13,8 +13,8 @@ This folder provides the **prediction files and AUROC (Area Under ROC Curve) gra
 ## FactBench Test Set Results
 
 ### $G$ Results
-[View in GERBIL](https://gerbil-kbc.aksw.org/gerbil/experiment?id=202505150028)  
-![FactBench G Results](https://github.com/user-attachments/assets/63e85151-2be2-435b-92b9-b92f0725b38d)
+[View in GERBIL](https://gerbil-kbc.aksw.org/gerbil/experiment?id=202505170025)  
+![FactBench G Results](![image](https://github.com/user-attachments/assets/47c40ee1-fe9a-4130-9b84-7476455379a9))
 
 ### $G^*$ Results
 [View in GERBIL](https://gerbil-kbc.aksw.org/gerbil/experiment?id=202505150029)  
