@@ -132,6 +132,33 @@ Full CSVs and charts are available in `/Prediction_files_and_AUROC_graphs`.
 
 ---
 
+---
+
+## 🏆 Reproducing Results for Competing Approaches
+
+To reproduce results for all baseline approaches over large knowledge graphs, we provide an updated version of the [Kstream-Graph-Transformer](https://github.com/factcheckerr/knowledgestream-graph-transformer) project. This tool transforms your KG for compatibility with large-scale path-based evaluation frameworks.
+
+**Before you begin:**
+- Download the latest Wikidata RDF dump.
+- Append the extracted triples provided in the `/Assertions` folder to the Wikidata dump.
+- Specify the location of the combined KG file in the main configuration of the Kstream-Graph-Transformer project.
+
+After transforming the KG, you can use [FAVEL](https://github.com/dice-group/favel) together with [KnowledgeStream](https://github.com/saschaTrippel/knowledgestream) to run and evaluate the following baseline approaches:
+
+- **Katz** (`katz`)
+- **PathEnt** (`pathent`)
+- **SimRank** (`simrank`)
+- **Adamic Adar** (`adamic_adar`)
+- **Jaccard** (`jaccard`)
+- **Degree Product** (`degree_product`)
+- **PredPath** (`predpath`)
+- **PRA** (`pra`)
+
+For step-by-step instructions, refer to the documentation in each individual repository. The combination of these tools allows for reproducible evaluation and benchmarking in line with the results reported in our paper.
+
+---
+
+
 ## 📚 Additional Resources
 
 ### Datasets
